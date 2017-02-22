@@ -2,7 +2,7 @@
 
 The code used for the simulation of the following paper:
 
-S. Dräxler, H. Karl. Specification, Composition, and Placement of Network Services with Flexible Structures. International Journal of Network Management. 2017;e1963. DOI:10.1002/nem.1963.
+* S. Dräxler, H. Karl. Specification, Composition, and Placement of Network Services with Flexible Structures. International Journal of Network Management. 2017;e1963. DOI:10.1002/nem.1963.
 
 The optimization approach is also relevant for our following papers:
 
