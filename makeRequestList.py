@@ -385,6 +385,8 @@ if reqtype == 'mixed':
     request_list.append(Request(req172))
     request_list.append(Request(req180))
     request_list.append(Request(req181))
+elif reqtype == 'req150':
+    request_list.append(Request(req150))
 elif reqtype == 'req20':
     request_list.append(Request(req20))
 elif reqtype == 'req20s':

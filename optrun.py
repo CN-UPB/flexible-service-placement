@@ -25,12 +25,12 @@ placementInput_list = []
 # objective_mode = 'dr'
 # reqtype = 'optorder'
 
-reqtype = sys.argv[1]
-netname = sys.argv[2]
-objective_mode = sys.argv[3]
-# reqtype = raw_input("Enter request type: ")
-# netname = raw_input("Enter network name: ")
-# objective_mode = raw_input("Enter optimization objective: ")
+# reqtype = sys.argv[1]
+# netname = sys.argv[2]
+# objective_mode = sys.argv[3]
+reqtype = raw_input("Enter request type (e.g., 'req150'): ")
+netname = raw_input("Enter network name (e.g., 'abilene'): ")
+objective_mode = raw_input("Enter optimization objective (e.g., 'lat' to minimize total latency, 'use' to minimize the number of used network nodes, 'dr' to maximize the total remaining link capacity in network): ")
 
 # seed = int(sys.argv[3])
 # network = 'abilene'
