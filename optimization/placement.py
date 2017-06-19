@@ -533,6 +533,34 @@ class Placement:
 									- wnode * quicksum(self.used[v] for v in self.V)
 									- wlat * quicksum(quicksum(quicksum(self.lat[u1,u2] for (u1,u2) in path) for path in self.pathPairs[(a1,a2)]) for (a1,a2) in self.data.l_req), GRB.MAXIMIZE)
 
+		# (1) minimize number of used nodes, (2) maximize latency 
+		elif objective_mode == 'use-lat+':
+			wlat = 1
+			wnode = wlat * pathpair_count * lat_sum
+			self.model.setObjective(wnode * quicksum(self.used[v] for v in self.V)
+									- wlat * quicksum(quicksum(quicksum(self.lat[u1,u2] for (u1,u2) in path) for path in self.pathPairs[(a1,a2)]) for (a1,a2) in self.data.l_req), GRB.MINIMIZE)	
+
+		# (1) minimize latency, (2) maximize number of used nodes
+		elif objective_mode == 'lat-use+':
+			wnode = 1
+			wlat = wnode * len(self.V)
+			self.model.setObjective(wlat * quicksum(quicksum(quicksum(self.lat[u1,u2] for (u1,u2) in path) for path in self.pathPairs[(a1,a2)]) for (a1,a2) in self.data.l_req)
+									- wnode * quicksum(self.used[v] for v in self.V), GRB.MINIMIZE)	
+
+		# Minimize (1) latency and (2) number of used nodes
+		elif objective_mode == 'lat-use-':
+			wnode = 1
+			wlat = wnode * len(self.V)
+			self.model.setObjective(wlat * quicksum(quicksum(quicksum(self.lat[u1,u2] for (u1,u2) in path) for path in self.pathPairs[(a1,a2)]) for (a1,a2) in self.data.l_req)
+									+ wnode * quicksum(self.used[v] for v in self.V), GRB.MINIMIZE)	
+
+		# Minimize (1) number of used nodes and (2) latency
+		elif objective_mode == 'use-lat-':
+			wlat = 1
+			wnode = wlat * pathpair_count * lat_sum			
+			self.model.setObjective(wlat * quicksum(quicksum(quicksum(self.lat[u1,u2] for (u1,u2) in path) for path in self.pathPairs[(a1,a2)]) for (a1,a2) in self.data.l_req)
+									+ wnode * quicksum(self.used[v] for v in self.V), GRB.MINIMIZE)												
+
 		# Maximize the remaining data rate capacity in network links, 
 		# over all network links except self-loops and minimize the mean utilization
 		# over all network nodes
